@@ -1,4 +1,5 @@
-#This code file runs the testing on the remaining 15% of the training dataset NCT-CRC-HE-100K. Here, the different trained models can be loaded and tested. Adjust the "XXX" for proper code usage. This file requires the data from the DataLoader_100K.py file as well as the save model parameters from the Train_100K.py file.
+#This code file runs the testing on the remaining 15% of the training dataset NCT-CRC-HE-100K. Here, the different trained models can be loaded and tested. 
+#Adjust the "XXX" for proper code usage. This file requires the data from the DataLoader_100K.py file as well as the save model parameters from the Train_100K.py file.
 
 from DataLoader_100K import *
 import pickle
@@ -34,7 +35,9 @@ def get_model(pretrained_model):
         def forward(self, x):
             x = self.pretrained(x)
             x = self.my_new_layers(x)
-            output = nn.functional.log_softmax(x, dim=1) #the log_softmax was unintentionally used in the project together with a CrossEntropyLoss, which applies log_softmax itself, so that this line should be removed from the code and only x should be returned
+            output = nn.functional.log_softmax(x, dim=1) 
+            #the log_softmax was unintentionally used in the project together with a CrossEntropyLoss, which applies log_softmax itself, 
+            #so that this line should be removed from the code and only x should be returned
             return output
     
     #Initializing adapted CNN based on chosen pretrained architecture
@@ -271,4 +274,5 @@ with open(macro_metrics_save_name, 'wb') as f:
     pickle.dump([macro_rec, macro_prec, macro_f1], f)
 #------------------------------------------------------------------------------
 
-#Outputs of this codefile are: testing log textfile, wrongly predicted image tiles, confusion matrices (absolute numbers, recall, precision) as .csv files, confusion matrices plots, testing time as .pkl file, Precision, recall and F1-score in a .pkl file and a .csv file
+#Outputs of this codefile are: testing log textfile, wrongly predicted image tiles, confusion matrices (absolute numbers, recall, precision) as .csv files, confusion matrices plots, 
+#testing time as .pkl file, Precision, recall and F1-score in a .pkl file and a .csv file
