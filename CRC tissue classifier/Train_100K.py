@@ -1,4 +1,5 @@
-#This code file runs the training on 85% of the training dataset NCT-CRC-HE-100K. Here, different backbone architectures can be used. In this project EfficientNet, GoogleNet and Resnet50 architectures were trained. Adjust the "XXX" for proper code usage. It needs the data from the DataLoader_100K.py file.
+#This code file runs the training on 85% of the training dataset NCT-CRC-HE-100K. Here, different backbone architectures can be used. 
+#In this project EfficientNet, GoogleNet and Resnet50 architectures were trained. Adjust the "XXX" for proper code usage. It needs the data from the DataLoader_100K.py file.
 
 from DataLoader_100K import *
 import pickle
@@ -83,7 +84,9 @@ def get_model(pretrained_model):
         def forward(self, x):
             x = self.pretrained(x)
             x = self.my_new_layers(x)
-            output = nn.functional.log_softmax(x, dim=1) #the log_softmax was unintentionally used in the project together with a CrossEntropyLoss, which applies log_softmax itself, so that this line should be removed from the code and only x should be returned
+            output = nn.functional.log_softmax(x, dim=1) 
+            #the log_softmax was unintentionally used in the project together with a CrossEntropyLoss, which applies log_softmax itself, 
+            #so that this line should be removed from the code and only x should be returned
             return output
     
     #Initializing adapted CNN based on chosen pretrained architecture
@@ -107,7 +110,11 @@ def get_model(pretrained_model):
 #Set k-fold splits, number of training epochs and batch size
 #------------------------------------------------------------------------------
 k=5 
-#number of folds for crossvalidation, this can also be skipped as this code does not perform "real" crossvalidation. Basically what happens in this project is that the model is trained on 4/5 of the whole training data for five epochs and then for other 4/5 and so on. This means that the model sees all training data at least once and is validated during training on the remaining 1/5. Typical crossvalidation would train on 4/5, then validate on 1/5 and then reset the model parameters for training on the next split. Thus, you can use a plain train-validation-test split, e.g. 0.7, 0.15, 0.15 and train for 25 epochs on the training set with monitoring on the validation set during training. 
+#number of folds for crossvalidation, this can also be skipped as this code does not perform "real" crossvalidation. 
+#Basically what happens in this project is that the model is trained on 4/5 of the whole training data for five epochs and then for other 4/5 and so on. 
+#This means that the model sees all training data at least once and is validated during training on the remaining 1/5. 
+#Typical crossvalidation would train on 4/5, then validate on 1/5 and then reset the model parameters for training on the next split. 
+#Thus, you can use a plain train-validation-test split, e.g. 0.7, 0.15, 0.15 and train for 25 epochs on the training set with monitoring on the validation set during training. 
 
 splits=KFold(n_splits=k, shuffle=True, random_state=42)
 num_epochs = 5 #as stated before, adjust this number when not using crossvalidation
@@ -166,7 +173,8 @@ def training(cnn, dataset, criterion, num_epochs, batch_size, data_dir, date):
     model = cnn
     model.to(device) #device defined in the beginning
     
-    #Defining gradient function: Here, different learning rates were used for the backbone (only fine-tuning) and for the added layers. In general, backbone layers can also be frozen here, or different learning rates could be used.
+    #Defining gradient function: Here, different learning rates were used for the backbone (only fine-tuning) and for the added layers. 
+    #In general, backbone layers can also be frozen here, or different learning rates could be used.
     optimizer = optim.Adam([
         {"params": model.pretrained.parameters(), "lr": 0.0003},
         {"params": model.my_new_layers.parameters(), "lr": 0.001},
@@ -314,4 +322,5 @@ plot_train_curves(history_df, "loss")
 plot_train_curves(history_df, "accuracy")
 #------------------------------------------------------------------------------
 
-#Outputs of this codefile are: training log textfile, model parameters of model with lowest validation loss during training, training history as .csv file, training time as .pkl file, and training loss and accuracy plots
+#Outputs of this codefile are: training log textfile, model parameters of model with lowest validation loss during training, training history as .csv file, training time as .pkl file, 
+#and training loss and accuracy plots
