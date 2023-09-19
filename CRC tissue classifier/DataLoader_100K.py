@@ -1,4 +1,5 @@
-#This code file loads and transforms images from the NCT-CRC-HE-100K dataset so that they can be used for training and testing (different code files). Adjust the "XXX" for proper code usage. This files requires the download of the NCT-CRC-HE-100K dataset.
+#This code file loads and transforms images from the NCT-CRC-HE-100K dataset so that they can be used for training and testing (different code files). 
+#Adjust the "XXX" for proper code usage. This files requires the download of the NCT-CRC-HE-100K dataset.
 
 import random, os
 import shutil
