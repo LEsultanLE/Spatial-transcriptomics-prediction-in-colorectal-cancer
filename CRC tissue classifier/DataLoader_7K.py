@@ -1,4 +1,5 @@
-#This code file loads and transforms images from the CRC-VAL-HE-7K dataset so that they can be used for training and testing (different code files). Adjust the "XXX" for proper code usage. This file requires the download of the CRC-VAL-HE-7K dataset.
+#This code file loads and transforms images from the CRC-VAL-HE-7K dataset so that they can be used for training and testing (different code files). 
+#Adjust the "XXX" for proper code usage. This file requires the download of the CRC-VAL-HE-7K dataset.
 
 import random, os
 import shutil
