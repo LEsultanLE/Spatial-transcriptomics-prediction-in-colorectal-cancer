@@ -4,6 +4,8 @@ This project's aim was to predict spatial gene expression in colorectal cancer (
 2. Pre-processing in-situ sequencing (CARTANA) spatial transcriptomics (ST) data for further use.
 3. Developing single-gene and multi-gene CNN-based models to predict spatial gene expression patterns from selected genes.
 
+![Example image of spatial gene expression prediction.](https://github.com/LEsultanLE/Spatial-transcriptomics-prediction-in-colorectal-cancer/blob/main/Spatial_gene_prediction_example.jpg)
+
 [^1]: 10.5281/zenodo.1214456
 
 ## CRC tissue classifier
